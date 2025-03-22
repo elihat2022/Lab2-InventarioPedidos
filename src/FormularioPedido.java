@@ -7,11 +7,8 @@ import java.util.List;
 
 
 public class FormularioPedido extends JFrame {
-
+    // Componentes
     private ButtonGroup grupoBotones;
-
-
-
     private JTextField nombreField;
     private JLabel nombreLabel;
     private JLabel tipoMLabel;
@@ -28,11 +25,11 @@ public class FormularioPedido extends JFrame {
     JButton borrarButton;
     JButton confirmarButton;
     JButton verPedidosButton;
-
+    // Constructor
     public FormularioPedido() {
         initUI();
     }
-
+    // Métodos
     private void initUI() {
         setTitle("Pedidos");
         setSize(650, 300);
@@ -90,6 +87,7 @@ public class FormularioPedido extends JFrame {
         panelDeOpciones.add(principalCheckBox);
         panelDeOpciones.add(secundariaCheckBox);
 
+        // Botones
         JPanel panelDeBotones = new JPanel(new GridLayout(1,2,10,10));
         borrarButton = new JButton("Borrar");
         borrarButton.setBackground(new Color(221, 55, 55));
@@ -116,11 +114,10 @@ public class FormularioPedido extends JFrame {
         panelDeBotones.add(confirmarButton);
         panelDeBotones.add(verPedidosButton);
 
-
+        // Se añaden los paneles al contentPane
         contentPane.add(inputPanel, BorderLayout.NORTH);
         contentPane.add(panelDeOpciones, BorderLayout.CENTER);
         contentPane.add(panelDeBotones, BorderLayout.SOUTH);
-
         setVisible(true);
 
     }
@@ -135,9 +132,7 @@ public class FormularioPedido extends JFrame {
         } catch (NullPointerException e) {
             return null;
         }
-
     }
-
 
 
     public Integer getCantidadField() {

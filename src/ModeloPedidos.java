@@ -12,16 +12,16 @@ public class ModeloPedidos {
         private List<String> sucursales;
 
 
-        public Medicamento(String nombre, String tipo, Integer cantidad, String distribuidor, List<String> sucursales) {
+        public Medicamento(String nombre, String tipo, Integer cantidad, String distribuidor,
+                           List<String> sucursales) {
             this.nombre = nombre;
             this.tipo = tipo;
             this.cantidad = cantidad;
             this.distribuidor = distribuidor;
             this.sucursales = sucursales;
 
-
         }
-
+        // Getters y Setters
         public String getNombre() {
             return nombre;
         }
@@ -65,10 +65,12 @@ public class ModeloPedidos {
 
     private final List<Medicamento> listaMedicamentos;
 
+    // Constructor de la clase ModeloPedidos
     public ModeloPedidos() {
         listaMedicamentos = new ArrayList<>();
     }
 
+    // Métodos de la clase ModeloPedidos
     public boolean nombreDeMedicamentoValido(String nombre){
         return nombre != null && !nombre.isEmpty() && nombre.matches("[a-zA-Z0-9]+");
     }

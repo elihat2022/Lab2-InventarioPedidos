@@ -25,29 +25,35 @@ public class ControladorPedidos implements ActionListener {
         String distribuidor = ventanaPedidos.getDistribuidorSelection();
         List<String> sucursales = ventanaPedidos.getSucursales();
 
+        // Validación de datos botón Confirmar
         if(e.getSource() == ventanaPedidos.confirmarButton) {
 
             if(!modeloPedidos.nombreDeMedicamentoValido(nombreMedicamento)){
-                JOptionPane.showMessageDialog(ventanaPedidos, "Debe ingresar un nombre de medicamento válido.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(ventanaPedidos, "Debe ingresar un nombre de medicamento válido.",
+                        "Advertencia", JOptionPane.WARNING_MESSAGE);
                 return;
             }
             if(tipoMedicamento == null || tipoMedicamento.isEmpty()){
-                JOptionPane.showMessageDialog(ventanaPedidos, "Debe seleccionar un tipo de medicamento.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(ventanaPedidos, "Debe seleccionar un tipo de medicamento.",
+                        "Advertencia", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
             if(cantidadMedicamento == null || !modeloPedidos.cantidadDeMedicamentoValida(cantidadMedicamento)){
-                JOptionPane.showMessageDialog(ventanaPedidos, "Debe ingresar una cantidad válida.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(ventanaPedidos, "Debe ingresar una cantidad en números válida.",
+                        "Advertencia", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
             if(distribuidor == null){
-                JOptionPane.showMessageDialog(ventanaPedidos, "Debe seleccionar un distribuidor.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(ventanaPedidos, "Debe seleccionar un distribuidor.",
+                        "Advertencia", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
             if(sucursales == null){
-                JOptionPane.showMessageDialog(ventanaPedidos, "Debe seleccionar al menos una sucursal.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(ventanaPedidos, "Debe seleccionar al menos una sucursal.",
+                        "Advertencia", JOptionPane.WARNING_MESSAGE);
             }
 
             ModeloPedidos.Medicamento medicamento = new ModeloPedidos.Medicamento(nombreMedicamento,
@@ -57,39 +63,34 @@ public class ControladorPedidos implements ActionListener {
             ventanaResumen.mostrarResumen(medicamento);
             ventanaResumen.setControlador(this);
             ventanaResumen.setVisible(true);
-
-
-        } else if (e.getSource() == ventanaPedidos.borrarButton) {
+        } // Borrar campos
+        else if (e.getSource() == ventanaPedidos.borrarButton) {
             ventanaPedidos.borrarCampos();
 
-        } else if (e.getSource() == ventanaResumen.confirmarButton){
+        } // Confirmar pedido
+        else if (e.getSource() == ventanaResumen.confirmarButton){
 
             ModeloPedidos.Medicamento medicamento = new ModeloPedidos.Medicamento(nombreMedicamento,
                     tipoMedicamento, cantidadMedicamento, distribuidor, sucursales);
             modeloPedidos.agregarMedicamento(medicamento);
             modeloPedidos.imprimirListaMedicamentos();
             System.out.println("Pedido confirmado");
+
             JOptionPane.showMessageDialog(ventanaResumen, "Pedido Confirmado", "Información", JOptionPane.INFORMATION_MESSAGE);
             ventanaResumen.dispose();
             ventanaPedidos.borrarCampos();
 
-        }else if (e.getSource() == ventanaResumen.cancelarButton) {
+        } // Cancelar pedido
+        else if (e.getSource() == ventanaResumen.cancelarButton) {
             ventanaResumen.dispose();
-        }// Add this to your existing actionPerformed method
+        }// Ver tabla de pedidos
         else if (e.getSource() == ventanaPedidos.verPedidosButton) {
             vistaTablaPedidos = new VistaTablaPedidos(modeloPedidos.getListaMedicamentos());
             vistaTablaPedidos.setControlador(this);
             vistaTablaPedidos.setVisible(true);
-        } else if (e.getSource() instanceof JButton && ((JButton) e.getSource()).getText().equals("Cerrar")) {
+        }// Cerrar table de pedidos
+        else if (e.getSource() instanceof JButton && ((JButton) e.getSource()).getText().equals("Cerrar")) {
             ((JFrame) ((JButton) e.getSource()).getTopLevelAncestor()).dispose();
-    }
-
-
-
-
-
-
-
-
+        }
     }
 }

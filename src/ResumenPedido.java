@@ -4,16 +4,13 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class ResumenPedido extends JFrame {
-
-
-
-
+    // Componentes
     private JLabel tipoMedicamentoLabel;
     private JLabel direccionLabel;
     JButton cancelarButton;
     JButton confirmarButton;
 
-
+    // Constructor
     public ResumenPedido() {
         UIComponents();
     }
@@ -46,7 +43,6 @@ public class ResumenPedido extends JFrame {
         cancelarButton.setBorderPainted(false);
         cancelarButton.setFocusPainted(false);
 
-
         confirmarButton = new JButton("Confirmar");
         confirmarButton.setBackground(new Color(4, 188, 35));
         confirmarButton.setForeground(Color.WHITE);
@@ -54,19 +50,15 @@ public class ResumenPedido extends JFrame {
         confirmarButton.setBorderPainted(false);
         confirmarButton.setFocusPainted(false);
 
-
-
-
         panelBotones.add(cancelarButton);
         panelBotones.add(confirmarButton);
-
-
 
         resumenPanel.add(mostrarInfo, BorderLayout.NORTH);
         resumenPanel.add(panelBotones, BorderLayout.SOUTH);
 
     }
 
+    // Métodos
     public void setControlador(ActionListener controlador){
         cancelarButton.addActionListener(controlador);
         confirmarButton.addActionListener(controlador);
@@ -80,12 +72,12 @@ public class ResumenPedido extends JFrame {
         List<String> sucursales = medicamento.getSucursales();
 
         if (sucursales.contains("Principal") && sucursales.contains("Secundaria")) {
-            direccionLabel.setText("Para las farmacias situadas en Calle de la Rosa n.28, Calle Alcazabilla n.3, " +
+            direccionLabel.setText("Para las farmacias situadas en Calle de la Rosa n.28" +
                     "Avenida 3 y Calle 18 y 19 en barrio La Playa");
         } else if (sucursales.contains("Principal")) {
-            direccionLabel.setText("Para la farmacia situada en Calle de la Rosa n.28 y para la situada en Calle Alcazabilla n.3");
+            direccionLabel.setText("Para la farmacia situada en Calle de la Rosa n.28 ");
         } else if (sucursales.contains("Secundaria")) {
-            direccionLabel.setText("Para la farmacia situada en Avenida 3 y para la situada en Calle 18 y 19 en barrio La Playa");
+            direccionLabel.setText("Para la farmacia situada en Avenida 3 conn Calle 18 y 19 en barrio La Playa");
         }
 
 

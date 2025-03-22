@@ -88,13 +88,13 @@ public class VistaTablaPedidos extends JFrame {
         return String.join(" y ", sucursales);
     }
     // Método para agregar un medicamento a la tabla
-    public void agregarMedicamento(ModeloPedidos.Medicamento med) {
+    public void agregarMedicamento(ModeloPedidos.Medicamento medicamento) {
         Object[] fila = new Object[5];
-        fila[0] = med.getNombre();
-        fila[1] = med.getTipo();
-        fila[2] = med.getCantidad();
-        fila[3] = med.getDistribuidor();
-        fila[4] = formatSucursales(med.getSucursales());
+        fila[0] = medicamento.getNombre();
+        fila[1] = medicamento.getTipo();
+        fila[2] = medicamento.getCantidad();
+        fila[3] = medicamento.getDistribuidor();
+        fila[4] = formatSucursales(medicamento.getSucursales());
         modeloTabla.addRow(fila);
     }
     public void setControlador(ActionListener controlador) {
