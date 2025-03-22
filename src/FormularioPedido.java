@@ -11,7 +11,7 @@ public class FormularioPedido extends JFrame {
     private ButtonGroup grupoBotones;
 
 
-    JPanel contentPane;
+
     private JTextField nombreField;
     private JLabel nombreLabel;
     private JLabel tipoMLabel;
@@ -25,8 +25,9 @@ public class FormularioPedido extends JFrame {
     private JRadioButton cemefarRadioButton;
     private JCheckBox principalCheckBox;
     private JCheckBox secundariaCheckBox;
-    private JButton borrarButton;
-    private JButton confirmarButton;
+    JButton borrarButton;
+    JButton confirmarButton;
+    JButton verPedidosButton;
 
     public FormularioPedido() {
         initUI();
@@ -34,11 +35,12 @@ public class FormularioPedido extends JFrame {
 
     private void initUI() {
         setTitle("Pedidos");
-        setSize(500, 300);
+        setSize(650, 300);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
         JPanel contentPane =  new JPanel();
+        contentPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         contentPane.setLayout(new BorderLayout());
         setContentPane(contentPane);
 
@@ -50,7 +52,7 @@ public class FormularioPedido extends JFrame {
         tipoMLabel = new JLabel("Tipo Medicamento:");
         tipoMedicamentoField = new JComboBox<>(new String[] {"Analgésico", "Analéptico", "Anestésico",
                 "Antiácido", "Antidepresivo", "Antibióticos"});
-
+        tipoMedicamentoField.setSelectedIndex(-1);
         cantidadLabel = new JLabel("Cantidad");
         cantidadField = new JTextField (20);
         // Se añaden al JPanel
@@ -90,9 +92,29 @@ public class FormularioPedido extends JFrame {
 
         JPanel panelDeBotones = new JPanel(new GridLayout(1,2,10,10));
         borrarButton = new JButton("Borrar");
+        borrarButton.setBackground(new Color(221, 55, 55));
+        borrarButton.setForeground(Color.WHITE);
+        borrarButton.setOpaque(true);
+        borrarButton.setBorderPainted(false);
+        borrarButton.setFocusPainted(false);
+
         confirmarButton = new JButton("Confirmar");
+        confirmarButton.setBackground(new Color(4, 188, 35));
+        confirmarButton.setForeground(Color.WHITE);
+        confirmarButton.setOpaque(true);
+        confirmarButton.setBorderPainted(false);
+        confirmarButton.setFocusPainted(false);
+
+        verPedidosButton = new JButton("Ver Tabla de Pedidos");
+        verPedidosButton.setBackground(new Color(70, 130, 180));
+        verPedidosButton.setForeground(Color.WHITE);
+        verPedidosButton.setOpaque(true);
+        verPedidosButton.setBorderPainted(false);
+        verPedidosButton.setFocusPainted(false);
+
         panelDeBotones.add(borrarButton);
         panelDeBotones.add(confirmarButton);
+        panelDeBotones.add(verPedidosButton);
 
 
         contentPane.add(inputPanel, BorderLayout.NORTH);
@@ -109,12 +131,14 @@ public class FormularioPedido extends JFrame {
     }
     public String getTipoMedicamentoField() {
         try {
-            return (String) Objects.requireNonNull(tipoMedicamentoField.getSelectedItem()).toString();
+            return Objects.requireNonNull(tipoMedicamentoField.getSelectedItem()).toString();
         } catch (NullPointerException e) {
             return null;
         }
 
     }
+
+
 
     public Integer getCantidadField() {
         try {
@@ -139,7 +163,7 @@ public class FormularioPedido extends JFrame {
     }
 
     public List<String> getSucursales(){
-        List<String> sucursales = new ArrayList();
+        List<String> sucursales = new ArrayList<>();
         if (principalCheckBox.isSelected() && secundariaCheckBox.isSelected()) {
             sucursales.add("Principal");
             sucursales.add("Secundaria");
@@ -159,9 +183,17 @@ public class FormularioPedido extends JFrame {
 
     public void setControlador(ActionListener controladorPedidos) {
         confirmarButton.addActionListener(controladorPedidos);
-
+        borrarButton.addActionListener(controladorPedidos);
+        verPedidosButton.addActionListener(controladorPedidos);
     }
 
-
+    public void borrarCampos() {
+        nombreField.setText("");
+        tipoMedicamentoField.setSelectedIndex(-1);
+        cantidadField.setText("");
+        grupoBotones.clearSelection();
+        principalCheckBox.setSelected(false);
+        secundariaCheckBox.setSelected(false);
+    }
 
 }
